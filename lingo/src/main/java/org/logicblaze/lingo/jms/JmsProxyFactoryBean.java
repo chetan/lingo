@@ -21,8 +21,6 @@ package org.logicblaze.lingo.jms;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.factory.FactoryBean;
 
-import javax.jms.JMSException;
-
 /**
  * Factory bean for JMS proxies. Behaves like the proxied service when
  * used as bean reference, exposing the specified service interface.
@@ -40,7 +38,7 @@ public class JmsProxyFactoryBean extends JmsClientInterceptor implements Factory
 
     private Object serviceProxy;
 
-    public void afterPropertiesSet() throws JMSException {
+    public void afterPropertiesSet() {
         super.afterPropertiesSet();
         Class serviceInterface = getServiceInterface();
         this.serviceProxy = ProxyFactory.getProxy(serviceInterface, this);

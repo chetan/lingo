@@ -96,7 +96,7 @@ public class JmsClientInterceptor extends RemoteInvocationBasedAccessor implemen
         setRemoteInvocationFactory(factory);
     }
 
-    public void afterPropertiesSet() throws JMSException {
+    public void afterPropertiesSet() {
         RemoteInvocationFactory factory = getRemoteInvocationFactory();
         if (!(factory instanceof LingoRemoteInvocationFactory)) {
             throw new IllegalArgumentException("remoteInvocationFactory must be an instance of LingoRemoteInvocationFactory but was: " + factory);
@@ -111,7 +111,11 @@ public class JmsClientInterceptor extends RemoteInvocationBasedAccessor implemen
                 throw new IllegalArgumentException("requestor or connectionFactory is required");
             }
             else {
-                requestor = createRequestor();
+                try {
+                    requestor = createRequestor();
+                } catch (JMSException e) {
+                    throw new IllegalArgumentException("unable to create requestor", e);
+                }
             }
         }
         if (marshaller == null) {
