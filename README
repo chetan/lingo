@@ -1,0 +1,29 @@
+
+ABOUT
+-----
+
+I needed to use Lingo in a project recently and found that it was asking for
+all sorts of outdated libraries (e.g., Active MQ 4.0 from the Apache Incubator)
+that Maven could no longer find. So this repository is simply Lingo trunk r183
+with updated POM files. I also needed to make a few minor changes for a Spring
+interface change.
+
+USAGE
+-----
+
+Simply check out the repository and install the package.
+
+$ git clone git://github.com/chetan/lingo.git
+$ cd lingo
+$ mvn -Dmaven.test.skip=true source:jar install
+
+Then include it in your application's POM as version 1.4-SNAPSHOT like so:
+
+        <dependency>
+            <groupId>org.logicblaze.lingo</groupId>
+            <artifactId>lingo</artifactId>
+            <version>1.4-SNAPSHOT</version>
+        </dependency>
+
+That's it!
+
